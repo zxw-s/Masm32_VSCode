@@ -1,0 +1,115 @@
+# ====================== 通用系统忽略 ======================
+# Windows
+Thumbs.db
+Desktop.ini
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+# Linux
+*~
+
+# ===================== 日志、临时文件 =====================
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+
+# ====================== VSCode 专用缓存 ======================
+# .vscode/
+# 注意：如果你不要保存tasks.json/launch.json到仓库，打开上面一行注释，同时注释或删除下面这三行
+# !.vscode/tasks.json
+# !.vscode/launch.json
+# !.vscode/c_cpp_properties.json
+.vscode/.env
+.vscode/extensions.json
+.vscode/settings.jsonc
+.vscode/**/.git
+.vscode/.cache
+.vscode/ipch
+.vscode/.suo
+.vscode/*.log
+*.code-workspace
+# 临时缓存
+.vs/
+*.log
+*.log.*
+
+# 构建输出目录
+build/
+bin/
+obj/
+dist/
+
+# 本地用户配置
+*.csproj.user
+
+# ====================== Visual Studio ====================================
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+# 编译产物
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+ARM/
+# 项目缓存
+*.vcxproj.user
+*.csproj.user
+# 自定义输出文件夹
+bin/
+obj/
+
+# NuGet
+packages/
+*.nupkg
+
+# ====================== ASM / C / C++ 汇编、C、C++ ======================
+# 编译产物
+*.o
+*.obj
+*.exe
+*.out
+*.dll
+*.so
+*.a
+*.lib
+*.elf
+*.hex
+*.bin
+*.com
+*.dylib
+*.log
+*.exp
+
+# 编译中间文件
+*.i
+*.s
+# 强制追踪src目录下所有文件（放在*.s后面，针对GAS项目）
+!src/*.s
+
+# MASM 专属文件
+*.lst
+*.sbr
+*.ilk
+*.res
+# 调试文件
+*.pdb
+*.map
+
+# NASM 可选生成
+*.dbg
+*.dis
+
+# 临时生成文件
+*.stackdump
+*.gcno
+*.gcda

@@ -1,0 +1,91 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        // ========== x86 32位 MASM (ml.exe)【Ctrl+Shift+B 默认】 ==========
+        {
+            "label": "ml-assemble-x86",
+            "type": "process",
+            "command": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\Hostx86\\x86\\ml.exe",
+            "args": [
+                "/c",
+                "/coff",
+                "/Zi",
+                "/I",
+                "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\include",
+                "/I",
+                "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.28000.0\\um",
+                "${file}",
+                "/Fo${fileDirname}\\${fileBasenameNoExtension}.obj"
+            ],
+            "problemMatcher": "$msCompile",
+            "presentation": {
+                "reveal": "always",
+                "echo": true
+            }
+        },
+        {
+            "label": "ml-link-x86",
+            "type": "process",
+            "command": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\Hostx86\\x86\\link.exe",
+            "args": [
+                "/SUBSYSTEM:CONSOLE",
+                // "/ENTRY:main",
+                "/DEBUG",
+                "/LIBPATH:C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\lib\\x86",
+                "/LIBPATH:C:\\Program Files (x86)\\Windows Kits\\10\\Lib\\10.0.28000.0\\um\\x86",
+                "user32.lib",
+                "kernel32.lib",
+                "${fileDirname}\\${fileBasenameNoExtension}.obj",
+                "/OUT:${fileDirname}\\${fileBasenameNoExtension}.exe"
+            ],
+            "dependsOn": [
+                "ml-assemble-x86"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": "$msCompile",
+            "presentation": {
+                "reveal": "always",
+                "echo": true
+            }
+        },
+        // ========== 运行任务：编译后执行 + pause ==========
+        {
+            "label": "masm-run-x86",
+            "type": "process",
+            "command": "${fileBasenameNoExtension}.exe",
+            "args": [],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "dependsOn": [
+                "ml-link-x86"
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "problemMatcher": "$msCompile",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "close": false
+            },
+        },
+        // ========== 清理：obj / exe / pdb ==========
+        {
+            "label": "clean asm",
+            "type": "shell",
+            "command": "cmd /c del /f \"${fileBasenameNoExtension}.obj\" \"${fileBasenameNoExtension}.exe\" \"${fileBasenameNoExtension}.pdb\" \"${fileBasenameNoExtension}.ilk\" 2>nul",
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always"
+            }
+        }
+    ]
+}
